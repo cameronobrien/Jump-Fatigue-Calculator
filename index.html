@@ -1,0 +1,154 @@
+<!--
+
+sudo cp -r /home/doot/jfcalculator/ /var/www/html/
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<html>
+  <head>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="Jump Fatigue Calculator">
+    <meta name="author" content="Timoxa Zero">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Jump Fatigue Calculator</title>
+    <link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet">
+    <link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+    <link href="sticky-footer-navbar.css" rel="stylesheet">
+  </head>
+ 
+  <body>
+<!-- Navigation -->
+        <nav class="nav navbar-default">
+            <div class="container" id="nav">
+                <!--
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">
+                        <img alt="Timoxa Zero" src="">
+                    </a>
+                </div>
+                -->
+                <div>
+                    <ul class="nav nav-tabs navbar-left">
+                        <li class="active" role="presentation">
+                            <a href="#">Fatigue Calculator</a>
+                        </li>
+                        <li role="presentation" class="disabled">
+                            <a href="#">Ratter Locator</a>
+                        </li>
+                        <li role="presentation" class="disabled">
+                            <a href="#">Shopping List</a>
+                        </li>
+                        <li role="presentation" class="disabled">
+                            <a href="#">Blog</a>
+                        </li>
+                        
+                    </ul>
+                    <ul class="nav nav-tabs navbar-right">
+                        <li role="presentation">
+                            <a href="#">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Title -->
+        <div class="container" id="jumbotron">
+            <div class="jumbotron">
+                <h2>Fatigue Calculator</h2>
+                <p>Calculate how much fatigue you will gather based on the Light Years you are jumping and your current level of jump fatigue. Remember to tick if you are flying a Jump Freighter or Black Ops ship, or else you might get incorrect numbers!</p>
+            </div>
+        </div>
+
+        <div class="col-sm-4 col-sm-offset-4">
+                <br>  
+                <input class="form-control" placeholder="Light Years" type="number" id="lightYears"><br>
+                <input class="form-control" placeholder="Current Timer(in minutes)" type="number" id="currentTimer"><br>
+                <label class="checkbox-inline"><input type = "checkbox" name="hull" value="Black Ops" id = "blops"/> Black Ops</label>
+                <label class="checkbox-inline"><input type = "checkbox" name="hull" value="Jump Freighter" id = "jf"/> Jump Freighter</label>
+                <button id="aButton" class="pull-right btn ban-default" onclick="calculate()">Calculate</button>
+                <p id="result"></p>
+                <p id="result2"></p></div>
+        
+        <!-- Main -->
+        <div class="container" id="main">
+            <div class="main">
+                <div class="row">
+                    
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+
+        
+
+
+      <script>
+          
+        
+        // Function that is run when someone clicks the button
+        function calculate()
+        {
+          
+          //console.log("Lets calc....");
+          
+          // Get the values from the inputs, putting them into floats for the sake of calculation
+          var ly = parseFloat(document.getElementById("lightYears").value);
+          var ct = parseFloat(document.getElementById("currentTimer").value);
+
+
+          
+          // Do the fatigue calculation
+          function doCalculation(currentTimer, lightYearsJumped)
+          {
+            if(document.getElementById('jf').checked)
+                var bonus = 0.9;
+            else if(document.getElementById('blops').checked)
+                var bonus = 0.5;
+            else
+                var bonus = 0;
+            var fatigueTotal =  Math.min(60*24*5,Math.max(currentTimer,10)*(1+(lightYearsJumped * (1 - bonus))));
+            console.log("doCalculation: " + fatigueTotal);
+            
+            return fatigueTotal.toFixed(3);
+         
+          }
+          function doCalculation2(currentTimer,lightYearsJumped)
+          {
+            if(document.getElementById('jf').checked)
+                var bonus = 0.9;
+            else if(document.getElementById('blops').checked)
+                var bonus = 0.5;
+            else
+                var bonus = 0;
+
+            var cooldown = Math.max(currentTimer / 10, 1 + (lightYearsJumped * (1 - bonus)));
+            console.log("cooldown:" + cooldown);
+            return cooldown.toFixed(3);
+
+
+
+          }
+
+          // Display the result
+          document.getElementById("result").innerHTML = "Fatigue (in minutes): " + doCalculation(ct, ly);
+          document.getElementById("result").innerHTML = "Cooldown (in minutes):" + doCalculation2(ct,ly);
+          
+        }
+
+      </script>
+    </div>
+  </body>
+  <footer class="footer">
+    <div class="container">
+            <p class="text-muted">Contact Timoxa Zero with issues or suggestions.</p>
+    </div>    
+  </footer>
+</html>

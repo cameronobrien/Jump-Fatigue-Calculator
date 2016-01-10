@@ -1,0 +1,63 @@
+.nav li {
+  display: inline;
+}
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.nav a {
+	font-family: Arial;
+	font-weight: bold;
+	
+    padding-top: 25px;
+    padding-bottom: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+    
+    text-transform: uppercase;
+    
+}
+
+ 
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+  /*background-color: #B8D4FF; */
+  background-image: url("spacebg.png");
+}
+ 
+footer {
+    background-color: #FFFFFF;
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 30px;
+}
+footer span {
+	color: #FFFFFF;
+}
+
+.nav-tabs {
+	border:none;
+	
+}
+.jumbotron {
+	margin-top: 25px;
+  box-shadow: 0 0 30px black;
+  
+}
+
+.col-sm-4 {
+   font-family: Arial;
+   font-weight: bold;
+   color: #FFFFFF;
+}
+
+
+
+
+
+
