@@ -111,7 +111,7 @@ sudo cp -r /home/doot/jfcalculator/ /var/www/html/
             var bonus = (isIndy ? 0.1 : 1) * (isCovert ? 0.5 : 1);
 
 
-            var fatigueTotal =  Math.min(60*24*5,Math.max(currentTimer,10)*(1+(lightYearsJumped * (bonus))));
+            var fatigueTotal =  Math.min(60*24*5,Math.max((currentTimer,10))*(1+(lightYearsJumped * (bonus))));
             console.log("doCalculation: " + fatigueTotal);
             return fatigueTotal.toFixed(3);
             }
@@ -126,7 +126,7 @@ sudo cp -r /home/doot/jfcalculator/ /var/www/html/
             var bonus = (isIndy ? 0.1 : 1) * (isCovert ? 0.5 : 1);
          
           
-            var cooldown = Math.max(currentTimer / 10, 1 + (lightYearsJumped * (bonus)));
+            var cooldown = Math.max((currentTimer+fatigueTotal) / 10, 1 + (lightYearsJumped * (bonus)));
             console.log("cooldown:" + cooldown);
             return cooldown.toFixed(3);
         }
