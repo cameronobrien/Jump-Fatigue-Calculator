@@ -42,6 +42,7 @@ footer span {
 
 .nav-tabs {
 	border:none;
+	padding:10px;
 	
 }
 .jumbotron {
@@ -54,6 +55,14 @@ footer span {
    font-family: Arial;
    font-weight: bold;
    color: #FFFFFF;
+}
+
+.error
+{
+	border-style:solid;
+	border-color:red;
+	border-width:1px;
+
 }
 
 
