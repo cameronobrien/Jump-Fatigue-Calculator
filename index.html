@@ -90,8 +90,9 @@ sudo cp -r /home/doot/jfcalculator/ /var/www/html/
           
         
         // Function that is run when someone clicks the button
-        function calculate()
-        {
+        function calculate(){
+        "use strict";
+        
           
           //console.log("Lets calc....");
           
@@ -100,9 +101,9 @@ sudo cp -r /home/doot/jfcalculator/ /var/www/html/
           var ct = parseFloat(document.getElementById("currentTimer").value);
           
           // Do the fatigue calculation
-          function doCalculation(currentTimer, lightYearsJumped)
-            "use strict";
-            {
+          function doCalculation(currentTimer, lightYearsJumped){
+            
+                
             
             var isIndy = document.getElementById('indy').checked === true;
             var isCovert= (document.getElementById('blops').checked  === true) ||  (document.getElementById('covopsbridge').checked === true);
@@ -112,12 +113,13 @@ sudo cp -r /home/doot/jfcalculator/ /var/www/html/
 
             var fatigueTotal =  Math.min(60*24*5,Math.max(currentTimer,10)*(1+(lightYearsJumped * (bonus))));
             console.log("doCalculation: " + fatigueTotal);
+            return fatigueTotal.toFixed(3);
             }
             
-            return fatigueTotal.toFixed(3);
-        function doCalculation2(currentTimer,lightYearsJumped)
-        {
-            "use strict";
+            
+        function doCalculation2(currentTimer,lightYearsJumped){
+        
+            
            var isIndy = document.getElementById('indy').checked === true;
            var isCovert= (document.getElementById('blops').checked  === true) ||  (document.getElementById('covopsbridge').checked === true);
 
