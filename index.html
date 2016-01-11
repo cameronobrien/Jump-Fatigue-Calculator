@@ -1,7 +1,5 @@
 <!--
-
 sudo cp -r /home/doot/jfcalculator/ /var/www/html/
-
 -->
 
 <!DOCTYPE html>
@@ -42,9 +40,6 @@ sudo cp -r /home/doot/jfcalculator/ /var/www/html/
                             <a href="#">Ratter Locator</a>
                         </li>
                         <li role="presentation" class="disabled">
-                            <a href="#">Shopping List</a>
-                        </li>
-                        <li role="presentation" class="disabled">
                             <a href="#">Blog</a>
                         </li>
                         
@@ -71,8 +66,8 @@ sudo cp -r /home/doot/jfcalculator/ /var/www/html/
                 <input class="form-control" placeholder="Light Years" type="number" id="lightYears"><br>
                 <input class="form-control" placeholder="Current Timer(in minutes)" type="number" id="currentTimer"><br>
                 <label class="checkbox-inline"><input type = "checkbox" name="hull" value="Black Ops" id = "blops"/> Black Ops</label>
-                <label class="checkbox-inline"><input type = "checkbox" name="hull" value="Jump Freighter" id = "jf"/> Jump Freighter</label>
-                <label class="checkbox-inline"><input type = "checkbox" name="hull" value "Being Blops Bridged" id = "covops bridge"/> Blops Bridge </label>
+                <label class="checkbox-inline"><input type = "checkbox" name="hull" value="Being Blops Bridged" id = "covopsbridge"/> Blops Bridge </label>
+                <label class="checkbox-inline"><input type = "checkbox" name="hull" value="Industrial Ship" id = "indy"/> Industrial Ship</label>
                 <button id="aButton" class="pull-right btn ban-default" onclick="calculate()">Calculate</button>
                 <p id="result"></p>
                 <p id="result2"></p></div>
@@ -103,52 +98,42 @@ sudo cp -r /home/doot/jfcalculator/ /var/www/html/
           // Get the values from the inputs, putting them into floats for the sake of calculation
           var ly = parseFloat(document.getElementById("lightYears").value);
           var ct = parseFloat(document.getElementById("currentTimer").value);
-
-
           
           // Do the fatigue calculation
           function doCalculation(currentTimer, lightYearsJumped)
-          {
-            if(document.getElementById('jf').checked)
-                var bonus = 0.9;
-            else if(document.getElementById('blops').checked)
-                var bonus = 0.5;
-            else if(document.getElementById('covopsbridge').checked)
-                var bonus = 0.5;
-            else
-                var bonus = 0;
+            "use strict";
+            {
+            
+            var isIndy = document.getElementById('indy').checked === true;
+            var isCovert= (document.getElementById('blops').checked  === true) ||  (document.getElementById('covopsbridge').checked === true);
 
-            var fatigueTotal =  Math.min(60*24*5,Math.max(currentTimer,10)*(1+(lightYearsJumped * (1 - bonus))));
+            var bonus = (isIndy ? 0.1 : 1) * (isCovert ? 0.5 : 1);
+
+
+            var fatigueTotal =  Math.min(60*24*5,Math.max(currentTimer,10)*(1+(lightYearsJumped * (bonus))));
             console.log("doCalculation: " + fatigueTotal);
+            }
             
             return fatigueTotal.toFixed(3);
-         
-          }
-          function doCalculation2(currentTimer,lightYearsJumped)
-          {
-            if(document.getElementById('jf').checked)
-                var bonus = 0.9;
-            else if(document.getElementById('blops').checked)
-                var bonus = 0.5;
-            else if(document.getElementById('covopsbridge').checked)
-                var bonus = 0.5;
-            else
-                var bonus = 0;
+        function doCalculation2(currentTimer,lightYearsJumped)
+        {
+            "use strict";
+           var isIndy = document.getElementById('indy').checked === true;
+           var isCovert= (document.getElementById('blops').checked  === true) ||  (document.getElementById('covopsbridge').checked === true);
 
-            var cooldown = Math.max(currentTimer / 10, 1 + (lightYearsJumped * (1 - bonus)));
+            var bonus = (isIndy ? 0.1 : 1) * (isCovert ? 0.5 : 1);
+         
+          
+            var cooldown = Math.max(currentTimer / 10, 1 + (lightYearsJumped * (bonus)));
             console.log("cooldown:" + cooldown);
             return cooldown.toFixed(3);
-
-
-
-          }
-
+        }
           // Display the result
           document.getElementById("result").innerHTML = "Fatigue (in minutes): " + doCalculation(ct, ly);
           document.getElementById("result2").innerHTML = "Cooldown (in minutes):" + doCalculation2(ct,ly);
           
-        }
-
+            
+       }
       </script>
     </div>
   </body>
